@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타이머</title>
+</head>
+<body>
+    <button type="button" id="stopBtn">타이머 종료</button>
+    <h1 class="time"></h1>
+    <script>
+        let hour = 0;
+        let minute = 0;
+        let second = 0;
+
+        let interval = setInterval(() => {
+            const time = document.getElementsByClassName("time")[0];
+
+            second += 1;
+            if(second == 60) {
+                second -= 60;
+                minute += 1;
+            }
+
+            if(minute == 60) {
+                minute -= 60;
+                hour += 1;
+            }
+
+            if(hour == 99) {
+                hour -= 99;
+            }
+
+            const convertZeroTime = (time) => {
+                let timeStr = time < 10 ? `0${time}` : time;
+
+                return timeStr;
+            };
+
+            time.innerText = `${convertZeroTime(hour)}:${convertZeroTime(minute)}:${convertZeroTime(second)}`;
+
+            // if(hour < 10) {
+            //     time.innerText = `0${hour}`;
+            // } else {
+            //     time.innerText = `${hour}`;
+            // }
+
+            // if(minute < 10) {
+            //     time.innerText += `:0${minute}`;
+            // } else {
+            //     time.innerText += `:${minute}`;
+            // }
+
+            // if(second < 10) {
+            //     time.innerText += `:0${second}`;
+            // } else {
+            //     time.innerText += `:${second}`;
+            // }
+            
+        }, 1000)
+
+        const stopBtn = document.getElementById("stopBtn");
+
+        stopBtn.addEventListener("click", () => {
+            if(interval !== null && typeof interval !== 'undefined') {
+                clearInterval(interval);
+            }
+        });
+
+    </script>
+</body>
+</html>
