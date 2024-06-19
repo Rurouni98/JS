@@ -44,23 +44,13 @@
                 }
             }
         }
+        
+        // 한 번 더 따로 계산하는 대신 위에서 7까지 for문 돌리고 pop으로 꺼내기 + 원래 배열에서 삭제하기
+        let bonus = lottoArr.pop();
 
-        let bonus = lottoArr[6];
-
-        document.write(`이번주 로또 당첨 번호는 : `);
-        for(let i = 0; i < 6; i++) {
-            document.write(`${lottoArr[i]}, `);
-        }
-        document.write(`보너스 번호 : ${bonus}<br>`);
-
-        document.write(`구입한 로또 번호: `);
-        for(let i = 0; i < 6; i++) {
-            if(i == 5) {
-                document.write(`${userArr[i]}<br>`);
-                break;
-            }
-            document.write(`${userArr[i]}, `);
-        }
+        // for문 대신 join 이용해서 간소화
+        document.write(`이번주 로또 당첨 번호는 : ${lottoArr.join(', ')}, 보너스 번호 : ${bonus}<br>`); 
+        document.write(`구입한 로또 번호 : ${userArr.join(', ')}<br>`);
         
         let lottoCnt = 0;
         let bonusCheck = false;
@@ -76,7 +66,7 @@
             if(userArr[i] == bonus)
                 bonusCheck = true;
         }
-
+        
         if (lottoCnt == 5 && bonusCheck == true) {
             document.write(`2등입니다!`);
         } else if (lottoCnt >= 3 && lottoCnt < 6) {
